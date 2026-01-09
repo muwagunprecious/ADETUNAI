@@ -1,44 +1,41 @@
 import React from 'react';
 import { Card, CardHeader } from '../Card';
-import { BarChart2, TrendingUp, Target, Brain, CloudRain, Zap, Users, Download } from 'lucide-react';
+import { BarChart2, Zap, TrendingUp, Clock, CheckSquare, Sparkles, Download, Brain } from 'lucide-react';
 import { Button } from '../Button';
 
 const stats = [
-    { label: 'Weekly Focus', value: '38h 12m', icon: Brain, color: 'bg-purple-500', trend: '+14%' },
-    { label: 'Task Velocity', value: '92%', icon: Zap, color: 'bg-orange-500', trend: '+2%' },
-    { label: 'Deep Work', value: '4.5h', icon: Target, color: 'bg-blue-500', trend: '-5%' },
-    { label: 'Team Sync', value: '12h', icon: Users, color: 'bg-green-500', trend: '+22%' },
+    { label: 'Focus Score', value: '92/100', trend: '+12%', color: 'bg-brand-primary', icon: Zap },
+    { label: 'Deep Work', value: '4.2h', trend: '+0.8h', color: 'bg-purple-500', icon: Clock },
+    { label: 'Tasks Done', value: '24', trend: '+5', color: 'bg-green-500', icon: CheckSquare },
+    { label: 'Meetings', value: '3.1h', trend: '-1.2h', color: 'bg-orange-500', icon: BarChart2 },
 ];
 
 export function InsightsView() {
     return (
-        <div className="p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="flex items-center justify-between">
+        <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6 md:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Insights & Productivity</h1>
-                    <p className="text-slate-500 mt-1 font-medium">Adetun has observed a positive shift in your deep work focus.</p>
+                    <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight text-center md:text-left">Productivity Insights</h1>
+                    <p className="text-slate-500 mt-1 font-medium text-sm md:text-base text-center md:text-left">Your focus is up 15% this week.</p>
                 </div>
-                <Button variant="secondary" className="gap-2">
-                    <Download size={18} />
-                    Export Data
-                </Button>
+                <div className="flex bg-white rounded-xl border border-slate-200 p-1 shadow-sm w-full md:w-auto">
+                    <button className="flex-1 md:flex-none px-4 py-1.5 text-xs md:text-sm font-bold bg-slate-50 text-brand-primary rounded-lg">Week</button>
+                    <button className="flex-1 md:flex-none px-4 py-1.5 text-xs md:text-sm font-medium text-slate-500 hover:bg-slate-50 rounded-lg transition-colors">Month</button>
+                </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
                 {stats.map((stat) => (
-                    <Card key={stat.label} className="relative group overflow-hidden">
-                        <div className={`absolute top-0 right-0 p-4 opacity-5 group-hover:scale-110 transition-transform`}>
-                            <stat.icon size={80} />
-                        </div>
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className={`p-2 ${stat.color} bg-opacity-10 text-${stat.color.split('-')[1]}-600 rounded-lg`}>
-                                <stat.icon size={20} />
+                    <Card key={stat.label} className="relative group overflow-hidden p-3 md:p-5">
+                        <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-6">
+                            <div className={`p-1.5 md:p-2 ${stat.color} bg-opacity-10 text-brand-primary rounded-lg`}>
+                                <stat.icon size={16} className="md:w-5 md:h-5" />
                             </div>
-                            <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">{stat.label}</span>
+                            <span className="text-[8px] md:text-[10px] font-bold text-slate-500 uppercase tracking-widest truncate">{stat.label}</span>
                         </div>
                         <div className="flex items-end justify-between">
-                            <h2 className="text-3xl font-bold text-slate-800">{stat.value}</h2>
-                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${stat.trend.startsWith('+') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                            <h2 className="text-xl md:text-3xl font-bold text-slate-800">{stat.value}</h2>
+                            <span className={`text-[8px] md:text-[10px] font-bold px-1.5 py-0.5 rounded-full ${stat.trend.startsWith('+') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                                 {stat.trend}
                             </span>
                         </div>
@@ -46,56 +43,83 @@ export function InsightsView() {
                 ))}
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <Card className="h-[400px]">
-                    <CardHeader title="Focus Distribution" icon={TrendingUp} />
-                    <div className="flex items-end justify-between h-48 gap-3 mt-12 px-4">
-                        {[45, 60, 35, 80, 55, 90, 75].map((h, i) => (
-                            <div key={i} className="flex-1 group relative">
-                                <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity font-bold">
-                                    {h}%
-                                </div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+                <Card className="lg:col-span-2">
+                    <CardHeader title="Focus Distribution" subtitle="Daily average breakdown" icon={BarChart2} />
+                    <div className="h-48 md:h-64 flex items-end justify-between gap-1 md:gap-2 px-2 md:px-4 mt-8">
+                        {[65, 45, 85, 30, 90, 55, 75].map((h, i) => (
+                            <div key={i} className="flex-1 flex flex-col items-center gap-2 md:gap-3 group">
                                 <div
-                                    className="bg-brand-primary w-full rounded-t-lg transition-all duration-1000 group-hover:bg-brand-secondary"
+                                    className="w-full bg-slate-100 rounded-t-xl relative overflow-hidden group-hover:bg-brand-primary/10 transition-colors"
                                     style={{ height: `${h}%` }}
-                                />
-                                <div className="text-center mt-3 text-[10px] font-bold text-slate-400 uppercase">
-                                    {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i]}
+                                >
+                                    <div className="absolute bottom-0 left-0 right-0 bg-brand-primary rounded-t-xl transition-all duration-500 group-hover:h-full" style={{ height: '40%' }} />
+                                </div>
+                                <span className="text-[8px] md:text-[10px] font-bold text-slate-400 uppercase">{['M', 'T', 'W', 'T', 'F', 'S', 'S'][i]}</span>
+                            </div>
+                        ))}
+                    </div>
+                </Card>
+
+                <Card>
+                    <CardHeader title="Top Distractions" icon={Zap} />
+                    <div className="space-y-4 md:space-y-6">
+                        {[
+                            { label: 'Unscheduled Calls', value: '45m', color: 'bg-red-400' },
+                            { label: 'Slack Pings', value: '32m', color: 'bg-orange-400' },
+                            { label: 'Email Triaging', value: '28m', color: 'bg-blue-400' },
+                        ].map((d, i) => (
+                            <div key={i}>
+                                <div className="flex justify-between text-xs md:text-sm mb-2">
+                                    <span className="text-slate-600 font-semibold">{d.label}</span>
+                                    <span className="text-slate-900 font-bold">{d.value}</span>
+                                </div>
+                                <div className="w-full h-1.5 bg-slate-100 rounded-full">
+                                    <div className={`h-full ${d.color} rounded-full`} style={{ width: '60%' }} />
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <div className="mt-12 flex items-center justify-center gap-8">
-                        <div className="flex items-center gap-2">
-                            <div className="w-3 h-3 bg-brand-primary rounded-sm" />
-                            <span className="text-[10px] font-bold text-slate-500 uppercase">Productive Focus</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <div className="w-3 h-3 bg-slate-200 rounded-sm" />
-                            <span className="text-[10px] font-bold text-slate-500 uppercase">Meetings/Sync</span>
+                </Card>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+                <Card>
+                    <CardHeader title="Proactive Tips" subtitle="Based on your work habits" icon={TrendingUp} />
+                    <div className="space-y-3 md:space-y-4">
+                        <div className="p-3 md:p-4 bg-brand-primary/5 rounded-2xl border border-brand-primary/10 flex gap-4">
+                            <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-brand-primary/10 flex items-center justify-center text-brand-primary shrink-0">
+                                <Clock size={20} />
+                            </div>
+                            <div className="min-w-0">
+                                <h5 className="font-bold text-slate-800 text-xs md:text-sm">Earlier Starts?</h5>
+                                <p className="text-[10px] md:text-xs text-slate-600 mt-1 leading-relaxed">
+                                    You're 22% more productive between 8 AM and 10 AM. Consider moving deep work here.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </Card>
 
-                <Card className="h-[400px] flex flex-col justify-between">
-                    <CardHeader title="Adetun Proactive Tips" icon={Sparkles} />
-                    <div className="space-y-4 flex-1 mt-4">
-                        <div className="p-5 bg-blue-50 rounded-2xl border border-blue-100/50 flex gap-4">
-                            <Brain className="text-brand-primary mt-1 shrink-0" size={24} />
-                            <div>
-                                <h5 className="font-bold text-blue-900 mb-1">Schedule Deep Work</h5>
-                                <p className="text-sm text-blue-800 font-medium opacity-80 leading-relaxed">
-                                    Based on your Friday patterns, you're most productive between 10 AM and 1 PM. I can block this for you.
-                                </p>
-                                <Button variant="primary" size="sm" className="mt-4 rounded-xl shadow-blue-400/20">Block Time</Button>
+                <Card>
+                    <CardHeader title="Performance Score" subtitle="Comparative analysis" />
+                    <div className="flex flex-col items-center justify-center py-4 md:py-8">
+                        <div className="relative w-32 h-32 md:w-40 md:h-40">
+                            <svg className="w-full h-full -rotate-90">
+                                <circle cx="50%" cy="50%" r="45%" className="fill-none stroke-slate-100 stroke-[10]" />
+                                <circle
+                                    cx="50%" cy="50%" r="45%"
+                                    className="fill-none stroke-brand-primary stroke-[10] shadow-lg shadow-brand-primary/50"
+                                    strokeDasharray="283"
+                                    strokeDashoffset="28"
+                                    strokeLinecap="round"
+                                />
+                            </svg>
+                            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                <span className="text-3xl md:text-4xl font-black text-slate-900">92</span>
+                                <span className="text-[10px] md:text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-1">Excellent</span>
                             </div>
                         </div>
-                    </div>
-                    <div className="p-4 bg-orange-50 rounded-2xl border border-orange-100/50 flex items-center gap-4">
-                        <CloudRain className="text-orange-500" size={24} />
-                        <p className="text-xs font-bold text-orange-900 opacity-80">
-                            Heads up: You've skipped lunch 3 times this week. Adetun recommends a 30m break.
-                        </p>
                     </div>
                 </Card>
             </div>

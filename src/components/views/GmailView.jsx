@@ -12,47 +12,47 @@ const mockEmails = [
 
 export function GmailView() {
     return (
-        <div className="p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="flex items-center justify-between">
+        <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6 md:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Gmail Scan</h1>
-                    <p className="text-slate-500 mt-1 font-medium">Adetun has analyzed 24 new emails since your last check.</p>
+                    <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">Gmail Scan</h1>
+                    <p className="text-slate-500 mt-1 font-medium text-sm md:text-base">Adetun has analyzed 24 new emails.</p>
                 </div>
-                <Button variant="primary" className="gap-2">
+                <Button variant="primary" className="gap-2 w-full md:w-auto text-sm">
                     <Search size={18} />
-                    Scan for Action Items
+                    Scan Action Items
                 </Button>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
                 <div className="lg:col-span-2 space-y-6">
                     <Card>
-                        <div className="flex items-center justify-between mb-6">
-                            <div className="flex items-center gap-4">
-                                <button className="text-sm font-bold text-brand-primary border-b-2 border-brand-primary pb-1">Unread (12)</button>
-                                <button className="text-sm font-medium text-slate-400 pb-1">All Mail</button>
-                                <button className="text-sm font-medium text-slate-400 pb-1">Personal</button>
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                            <div className="flex items-center gap-4 overflow-x-auto pb-2 sm:pb-0 scrollbar-hide">
+                                <button className="text-sm font-bold text-brand-primary border-b-2 border-brand-primary pb-1 shrink-0">Unread (12)</button>
+                                <button className="text-sm font-medium text-slate-400 pb-1 shrink-0">All Mail</button>
+                                <button className="text-sm font-medium text-slate-400 pb-1 shrink-0">Personal</button>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <button className="p-2 text-slate-400 hover:text-slate-600"><Filter size={18} /></button>
+                            <div className="flex items-center gap-2 justify-end">
+                                <button className="p-2 text-slate-400 hover:text-slate-600 bg-slate-50 rounded-lg"><Filter size={18} /></button>
                             </div>
                         </div>
 
                         <div className="divide-y divide-slate-100">
                             {mockEmails.map((email) => (
-                                <div key={email.id} className="py-4 flex gap-4 group cursor-pointer hover:bg-slate-50/50 -mx-6 px-6 transition-colors">
-                                    <div className="mt-1">
+                                <div key={email.id} className="py-4 flex gap-3 md:gap-4 group cursor-pointer hover:bg-slate-50/50 -mx-4 md:-mx-6 px-4 md:px-6 transition-colors">
+                                    <div className="mt-1 shrink-0">
                                         <div className={`w-2 h-2 rounded-full ${email.priority === 'high' ? 'bg-red-500' : 'bg-blue-400'}`} />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex justify-between items-start mb-1">
-                                            <h4 className="font-bold text-slate-800 text-sm">{email.from}</h4>
-                                            <span className="text-xs text-slate-400 font-medium">{email.time}</span>
+                                            <h4 className="font-bold text-slate-800 text-xs md:text-sm truncate pr-2">{email.from}</h4>
+                                            <span className="text-[10px] text-slate-400 font-medium shrink-0">{email.time}</span>
                                         </div>
-                                        <p className="text-sm font-semibold text-slate-700 truncate">{email.subject}</p>
-                                        <p className="text-xs text-slate-500 mt-1 truncate">{email.snippet}</p>
+                                        <p className="text-xs md:text-sm font-semibold text-slate-700 truncate">{email.subject}</p>
+                                        <p className="text-[10px] md:text-xs text-slate-500 mt-1 line-clamp-1">{email.snippet}</p>
                                     </div>
-                                    <div className="flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div className="flex items-center opacity-0 group-hover:opacity-100 transition-opacity hidden sm:flex">
                                         <button className="p-2 text-slate-400 hover:text-brand-primary"><Star size={18} /></button>
                                         <button className="p-2 text-slate-400 hover:text-brand-primary"><ArrowRight size={18} /></button>
                                     </div>
@@ -65,21 +65,21 @@ export function GmailView() {
                 <div className="space-y-6">
                     <Card className="bg-brand-primary/5 border-brand-primary/10">
                         <CardHeader title="AI Insight" icon={ShieldCheck} />
-                        <p className="text-sm text-slate-600 leading-relaxed font-medium">
-                            I've identified a <span className="text-red-600 font-bold">critical legal document</span> that needs your signature by end of today. Sarah also mentioned some blockers in the strategy sync email.
+                        <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-medium">
+                            I've identified a <span className="text-red-600 font-bold">critical legal document</span> that needs your signature by end of today.
                         </p>
-                        <Button variant="primary" className="w-full mt-6 rounded-2xl">Create Summary Report</Button>
+                        <Button variant="primary" className="w-full mt-4 md:mt-6 rounded-2xl text-sm">Create Report</Button>
                     </Card>
 
                     <Card>
                         <CardHeader title="Search Habits" icon={Clock} />
                         <div className="space-y-4">
-                            <div className="flex items-center justify-between text-sm">
+                            <div className="flex items-center justify-between text-xs md:text-sm">
                                 <span className="text-slate-500 font-medium">Fastest response</span>
-                                <span className="text-slate-800 font-bold text-xs uppercase bg-green-100 text-green-700 px-2 py-0.5 rounded">Sarah J.</span>
+                                <span className="text-slate-800 font-bold text-[10px] md:text-xs uppercase bg-green-100 text-green-700 px-2 py-0.5 rounded">Sarah J.</span>
                             </div>
-                            <div className="flex items-center justify-between text-sm">
-                                <span className="text-slate-500 font-medium">Most active hour</span>
+                            <div className="flex items-center justify-between text-xs md:text-sm">
+                                <span className="text-slate-500 font-medium">Most active</span>
                                 <span className="text-slate-800 font-bold">10:00 AM</span>
                             </div>
                         </div>
